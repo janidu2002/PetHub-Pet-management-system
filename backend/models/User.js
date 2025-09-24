@@ -39,7 +39,17 @@ const userSchema = new mongoose.Schema({
   bio: {
     type: String,
     default: ''
-  }
+  },
+  savedPaymentMethods: [
+    {
+      brand: { type: String },
+      last4: { type: String },
+      expMonth: { type: Number },
+      expYear: { type: Number },
+      label: { type: String, default: '' },
+      createdAt: { type: Date, default: Date.now }
+    }
+  ]
 }, {
   timestamps: true
 });

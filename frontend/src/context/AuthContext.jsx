@@ -1,12 +1,11 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../services/api';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
 const AuthContext = createContext();
 
-axios.defaults.baseURL = 'http://localhost:5000/api';
-axios.defaults.withCredentials = true;
+// baseURL and credentials are configured in the shared api client
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
@@ -27,7 +26,7 @@ export const AuthProvider = ({ children }) => {
 
   const checkAuth = async () => {
     try {
-      const { data } = await axios.get('/auth/me');
+      const { data } = await api.get('/auth/me');
       if (data.success) {
         setUser(data.user);
       }
@@ -40,7 +39,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const { data } = await axios.post('/auth/login', { email, password });
+      const { data } = await api.post('/auth/login', { email, password });
       if (data.success) {
         setUser(data.user);
         toast.success('Login successful!');
@@ -54,7 +53,7 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (name, email, password) => {
     try {
-      const { data } = await axios.post('/auth/register', { name, email, password });
+      const { data } = await api.post('/auth/register', { name, email, password });
       if (data.success) {
         setUser(data.user);
         toast.success('Registration successful!');
@@ -68,7 +67,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      await axios.post('/auth/logout');
+      await api.post('/auth/logout');
       setUser(null);
       toast.success('Logged out successfully');
       navigate('/');

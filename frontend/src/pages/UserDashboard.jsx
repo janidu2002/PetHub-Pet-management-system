@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { User, Lock, Trash2, Save, AlertTriangle, Mail, Phone, MapPin, FileText, Calendar, Shield, Settings, Activity, Dog } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import toast from 'react-hot-toast';
-import axios from 'axios';
+import api from '../services/api';
 import PetsSection from '../components/PetsSection'
 const UserDashboard = () => {
   const { user, checkAuth } = useAuth();
@@ -43,7 +43,7 @@ const UserDashboard = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const { data } = await axios.put('/users/profile', profileData);
+      const { data } = await api.put('/users/profile', profileData);
       if (data.success) {
         toast.success('Profile updated successfully');
         checkAuth();
@@ -65,7 +65,7 @@ const UserDashboard = () => {
     
     setLoading(true);
     try {
-      const { data } = await axios.put('/users/password', {
+      const { data } = await api.put('/users/password', {
         currentPassword: passwordData.currentPassword,
         newPassword: passwordData.newPassword
       });
@@ -87,7 +87,7 @@ const UserDashboard = () => {
   const handleDeleteAccount = async () => {
     setLoading(true);
     try {
-      const { data } = await axios.delete('/users/account');
+      const { data } = await api.delete('/users/account');
       if (data.success) {
         toast.success('Account deleted successfully');
         window.location.href = '/';
@@ -391,7 +391,7 @@ const UserDashboard = () => {
 
             {activeSection === 'danger' && (
               <div className="bg-white rounded-xl shadow-sm p-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">Danger Zone</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">Delete</h2>
                 
                 <div className="bg-red-50 border-2 border-red-200 rounded-xl p-6">
                   <div className="flex items-start">

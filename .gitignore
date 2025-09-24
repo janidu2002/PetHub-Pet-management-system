@@ -1,2 +1,5 @@
 backend/.env
+backend/node_modules
+frontend/node_modules
 backend/create-admin.js
+backend/node_modules/.bin/mime

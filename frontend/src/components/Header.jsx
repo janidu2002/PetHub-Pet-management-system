@@ -10,7 +10,8 @@ import {
   X,
   Shield,
   Home,
-  UserCircle
+  UserCircle,
+  Calendar,
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
@@ -23,6 +24,12 @@ const Header = () => {
 
   const navLinks = [
     { path: '/', label: 'Home', icon: Home },
+    { path: '/shop', label: 'Shop', icon: LayoutDashboard },
+    { path: '/appointments/book', label: 'Book', icon: Calendar },
+    { path: '/appointments', label: 'My Appointments', icon: Calendar },
+    { path: '/cart', label: 'Cart', icon: LayoutDashboard },
+    { path: '/orders', label: 'Orders', icon: LayoutDashboard },
+    { path: '/payment', label: 'Payment', icon: LayoutDashboard },
   ];
 
   return (

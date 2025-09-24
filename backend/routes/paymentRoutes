@@ -1,0 +1,14 @@
+import express from 'express';
+import { protect } from '../middleware/auth-middleware.js';
+import { saveCard, listCards, updateCard, deleteCard } from '../controllers/paymentcontroller.js';
+
+const router = express.Router();
+
+router.get('/methods', protect, listCards);
+router.post('/methods', protect, saveCard);
+router.put('/methods/:id', protect, updateCard);
+router.delete('/methods/:id', protect, deleteCard);
+
+export default router;
+
+

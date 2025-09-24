@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Users, UserPlus, Edit2, Trash2, Save, X, Search, Mail, Phone, MapPin, Calendar, Shield, Activity, TrendingUp, Settings } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import toast from 'react-hot-toast';
-import axios from 'axios';
+import api from '../services/api';
 
 const AdminDashboard = () => {
   const { user, checkAuth } = useAuth();
@@ -42,7 +42,7 @@ const AdminDashboard = () => {
 
   const fetchStats = async () => {
     try {
-      const { data } = await axios.get('/admin/stats');
+      const { data } = await api.get('/admin/stats');
       if (data.success) {
         setStats(data.stats);
       }
@@ -53,7 +53,7 @@ const AdminDashboard = () => {
 
   const fetchAdmins = async () => {
     try {
-      const { data } = await axios.get('/admin/admins');
+      const { data } = await api.get('/admin/admins');
       if (data.success) {
         setAdmins(data.admins);
       }
@@ -69,7 +69,7 @@ const AdminDashboard = () => {
     }
     
     try {
-      const { data } = await axios.get(`/users/search?query=${searchQuery}`);
+      const { data } = await api.get(`/users/search?query=${searchQuery}`);
       if (data.success) {
         setSearchResults(data.users);
       }
@@ -82,7 +82,7 @@ const AdminDashboard = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const { data } = await axios.post('/admin/admins', newAdminData);
+      const { data } = await api.post('/admin/admins', newAdminData);
       if (data.success) {
         toast.success('Admin created successfully');
         setShowCreateModal(false);
@@ -99,7 +99,7 @@ const AdminDashboard = () => {
   const handleUpdateAdmin = async (adminId) => {
     setLoading(true);
     try {
-      const { data } = await axios.put(`/admin/admins/${adminId}`, editingAdmin);
+      const { data } = await api.put(`/admin/admins/${adminId}`, editingAdmin);
       if (data.success) {
         toast.success('Admin updated successfully');
         setEditingAdmin(null);
@@ -119,7 +119,7 @@ const AdminDashboard = () => {
     
     setLoading(true);
     try {
-      const { data } = await axios.delete(`/admin/admins/${adminId}`);
+      const { data } = await api.delete(`/admin/admins/${adminId}`);
       if (data.success) {
         toast.success('Admin deleted successfully');
         fetchAdmins();
@@ -135,7 +135,7 @@ const AdminDashboard = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const { data } = await axios.put('/users/profile', profileData);
+      const { data } = await api.put('/users/profile', profileData);
       if (data.success) {
         toast.success('Profile updated successfully');
         checkAuth();

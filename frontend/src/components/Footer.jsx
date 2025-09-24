@@ -24,7 +24,7 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold mb-4">Contact</h4>
             <p className="text-gray-400">
-              Email: support@authsystem.com<br />
+              Email: support@pethub.com<br />
               Phone: +1 (555) 123-4567
             </p>
           </div>
@@ -32,7 +32,7 @@ const Footer = () => {
         
         <div className="mt-8 pt-8 border-t border-gray-800 text-center">
           <p className="text-gray-400 flex items-center justify-center">
-            Made with <Heart className="w-4 h-4 mx-1 text-red-500" /> by AuthSystem Team
+            Made with <Heart className="w-4 h-4 mx-1 text-red-500" /> by pethub Team
           </p>
         </div>
       </div>
